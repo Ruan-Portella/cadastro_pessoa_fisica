@@ -13,7 +13,7 @@ export default function Login() {
 
   const onSubmit = async () => {
     try {
-      const response = await axios.post('http://localhost:3001/user/login', {
+      const response = await axios.post('http://localhost:3001/login', {
         email,
         password
       })
@@ -34,7 +34,7 @@ export default function Login() {
           error && <p className='text-red-500'>Email ou senha incorretos</p>
         }
         <Button title='Entrar' onClick={onSubmit} />
-        <a href="/create" className="font-semibold text-white not-italic hover:text-gray-300">
+        <a href="/signUp" className="font-semibold text-white not-italic hover:text-gray-300">
             Não tem conta? Se inscreva-se
         </a>
       </div>
