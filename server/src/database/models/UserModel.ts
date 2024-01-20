@@ -44,7 +44,7 @@ User.init(
     },
     profileImage: {
       allowNull: true,
-      type: DataTypes.STRING,
+      type: DataTypes.TEXT('long'),
     },
   },
   {
