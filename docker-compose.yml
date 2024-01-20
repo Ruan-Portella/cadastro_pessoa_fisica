@@ -1,0 +1,47 @@
+version: '3'
+
+services:
+  # frontend:
+  #   build: 
+  #     context: ./client
+  #     dockerfile: Dockerfile
+  #   container_name: client_frontend
+  #   ports:
+  #     - 3000:3000
+  #   env_file:
+  #     - ./client/.env
+  #   volumes:
+  #     - ./client/src:/app/client/src
+  #     - ./client/public:/app/client/public
+  #   depends_on:
+  #     - backend
+  backend:
+    build: 
+      context: ./server
+      dockerfile: Dockerfile
+    command: dev
+    container_name: server_backend
+    ports:
+      - 3001:3001
+    volumes:
+      - ./server/src:/app/server/src
+    env_file:
+      - ./server/.env
+    depends_on:
+      db:
+        condition: service_healthy
+  db:
+    image: mysql:8.0.32
+    container_name: server_db
+    env_file:
+      - ./server/.env
+    ports:
+      - 3306:3306
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      timeout: 10s
+      retries: 5
+    volumes:
+      - ./database:/docker-entrypoint-initdb.d
+    
+
