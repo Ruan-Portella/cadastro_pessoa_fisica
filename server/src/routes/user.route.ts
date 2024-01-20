@@ -1,5 +1,6 @@
 import { Router } from "express";
 import UserController from "../modules/user/User.controller";
+import middlewares from '../modules/middlewares/'
 
 const userRouter = Router();
 
@@ -12,6 +13,11 @@ userRouter.post(
 
 userRouter.post(
   "/create",
+  middlewares.validateEmail,
+  middlewares.validateName,
+  middlewares.validatePassword,
+  middlewares.validateTelephone,
+  middlewares.validateProfileImage,
   userController.create
 );
 

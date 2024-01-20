@@ -18,7 +18,7 @@ export default class UserService implements IUserService {
 
         const hashedPassword = await bcrypt.hash(password, 10);
 
-        const user = await User.create({ name, email, password: hashedPassword, telephone: telephone, profileImage: profileImage  });
+        const user = await User.create({ name, email, password: hashedPassword, telephone, profileImage });
 
         return { status: 201, data: user };
     }
@@ -39,7 +39,6 @@ export default class UserService implements IUserService {
     
     async findByEmail(email: string): Promise<ServiceResponse> {
         const user = await User.findOne({ where: { email } });
-
 
         if (!user) {
             return { status: 404, data: { message: 'User not found' } };
