@@ -20,4 +20,12 @@ export default class UserController {
 
         return response.status(user.status).json(user.data);
     }
+
+    async getUser(request: Request, response: Response): Promise<Response> {
+        const {id} = request.body.user;
+
+        const user = await userService.getUser(id);
+
+        return response.status(user.status).json(user.data);
+    }
 }

@@ -21,4 +21,10 @@ userRouter.post(
   userController.create
 );
 
+userRouter.get(
+  "/user",
+  middlewares.validateToken,
+  userController.getUser
+);
+
 export default userRouter;

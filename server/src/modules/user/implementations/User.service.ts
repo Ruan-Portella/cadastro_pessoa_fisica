@@ -62,4 +62,16 @@ export default class UserService implements IUserService {
 
         return { status: 200, data: user.data };
     }
+
+    async getUser(id: string): Promise<ServiceResponse> {
+        const user = await User.findOne({ where: { id } });
+
+        if (!user) {
+            return { status: 404, data: { message: 'User not found' } };
+        }
+
+        const { password, ...userWithoutPassword } = user.dataValues;
+
+        return { status: 200, data: userWithoutPassword };
+    }
 }
