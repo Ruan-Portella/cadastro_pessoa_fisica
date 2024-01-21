@@ -197,7 +197,7 @@ export default function AdressesModal({
           <Button 
           type='button' 
           title='Adicionar novo endereço' 
-          className='flex bg-black text-white w-1/6 text-[14px] justify-center hover:bg-slate-700' 
+          className='flex bg-black text-white w-1/6 text-[14px] justify-center hover:bg-slate-700 max-sm:w-2/3 max-sm:text-[12px]' 
           onClick={adicionarEndereco}
           />
         ) : (
@@ -205,7 +205,7 @@ export default function AdressesModal({
              <Button 
              type='button' 
              title='Remover Endereço' 
-             className='flex bg-black text-white w-1/6 text-[14px] justify-center hover:bg-slate-700' 
+             className='flex bg-black text-white w-1/6 text-[14px] justify-center hover:bg-slate-700 max-sm:w-2/3 max-sm:text-[12px]' 
              onClick={() => removeAdresses(index)}
              />
           </div>

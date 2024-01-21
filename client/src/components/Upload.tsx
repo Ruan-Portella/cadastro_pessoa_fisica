@@ -47,7 +47,7 @@ export default function Upload({ setProfileImage, label, isError, profileImage, 
     });
 
     return (
-        <div className="w-1/2 flex flex-col gap-1">
+        <div className="w-1/2 flex flex-col gap-1 max-lg:w-11/12">
             <label className="flex items-start" htmlFor="upload">
                 {label}
             </label>

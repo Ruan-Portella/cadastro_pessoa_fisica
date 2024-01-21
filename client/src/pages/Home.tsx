@@ -35,11 +35,11 @@ export default function Home() {
 
 
   return (
-    <main className="w-full flex max-sm:flex-col-reverse min-h-screen">
+    <main className="w-full flex max-sm:flex-col-reverse min-h-screen max-sm:bg-white">
       <div className={`sm:w-[90px] max-sm:flex max-sm:justify-center`}>
         <Header />
       </div>
-      <div className="w-full p-4 max-sm:p-0 max-sm:mb-[80px]">
+      <div className="w-full p-4 max-sm:p-0 max-sm:h-dvh">
         <div className="flex flex-col p-4 pl-10 pr-10 gap-6 w-full justify-center items-center rounded-lg 
     border-[#D3E2E5] border-[1px] bg-[white] max-sm:w-full max-sm:px-4 max-sm:py-6 max-sm:border-none">
           <div className="flex flex-col w-[100%] items-start">

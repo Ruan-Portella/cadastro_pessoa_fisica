@@ -266,7 +266,7 @@ export default function CreateUser() {
             </div>
           </div>
           <div className="flex flex-col w-[100%] items-start">
-            <Button type='button' className='mt-4 bg-black text-white w-1/6 hover:bg-slate-700' title='Salvar' onClick={onSubmit} />
+            <Button type='button' className='mt-4 bg-black text-white w-1/6 hover:bg-slate-700 max-sm:w-2/3 max-sm:text-[12px]' title='Salvar' onClick={onSubmit} />
           </div>
         </form>
       </div>

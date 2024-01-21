@@ -69,7 +69,7 @@ export default function ContactsModal({
         labelClassName='text-black' 
         label="Nome" 
         placeholder="Digite seu nome" 
-        className='xl:w-[32.9%] sm:w-[49%] max-sm:w-ful' 
+        className='xl:w-[32.9%] sm:w-[49%] max-sm:w-full' 
         id='name' 
         onChange={(e) => {
           handleContacts(index, 'name', e.target.value); 
@@ -134,7 +134,7 @@ export default function ContactsModal({
           <Button 
           type='button' 
           title='Adicionar novo contato' 
-          className='flex bg-black text-white w-1/6 text-[14px] justify-center hover:bg-slate-700'
+          className='flex bg-black text-white w-1/6 text-[14px] justify-center hover:bg-slate-700 max-sm:w-2/3 max-sm:text-[12px]'
           onClick={addContact}
           />
         ) : (
@@ -142,7 +142,7 @@ export default function ContactsModal({
              <Button 
              type='button' 
              title='Remover Contato' 
-             className='flex bg-black text-white w-1/6 text-[14px] justify-center hover:bg-slate-700' 
+             className='flex bg-black text-white w-1/6 text-[14px] justify-center hover:bg-slate-700 max-sm:w-2/3 max-sm:text-[12px]' 
              onClick={() => removeContacts(index)}
              />
           </div>

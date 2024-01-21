@@ -35,6 +35,7 @@ export default function Login() {
             placeholder='Digite seu email'
             type='text'
             value={email}
+            className='max-lg:w-11/12'
             onChange={(event) => setEmail(event.target.value)}
             label='Email'
           />
@@ -43,6 +44,7 @@ export default function Login() {
             placeholder='Digite sua senha'
             type='password'
             value={password}
+            className='max-lg:w-11/12'
             onChange={(event) => setPassword(event.target.value)}
             label='Senha'
           />
@@ -59,7 +61,7 @@ export default function Login() {
             Não tem conta? Se inscreva-se
           </a>
         </div>
-        <div className="bg-white w-full justify-center items-center flex">
+        <div className="bg-white w-full justify-center items-center flex max-sm:hidden">
           <Logo className='w-3/4' />
         </div>
       </form>

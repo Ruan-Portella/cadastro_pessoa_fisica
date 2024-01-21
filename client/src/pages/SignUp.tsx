@@ -41,12 +41,13 @@ export default function SignUp() {
   return (
     <main className="w-full h-[100dvh] flex">
       <form className="bg-red w-full flex flex-col justify-center items-center gap-3">
-        <h1 className='font-bold text-2xl'>Cria uma conta</h1>
+        <h1 className='font-bold text-2xl'>Criar uma conta</h1>
         <InputField 
         id='name' 
         placeholder='Digite seu nome' 
         type='text' 
         value={name} 
+        className='max-lg:w-11/12'
         onChange={(event) => setname(event.target.value)} 
         label='Nome' 
         isError={isError === 'name' ? true : false} 
@@ -57,6 +58,7 @@ export default function SignUp() {
         placeholder='Digite seu email' 
         type='text' 
         value={email} 
+        className='max-lg:w-11/12'
         onChange={(event) => setEmail(event.target.value)} 
         label='Email' 
         isError={isError === 'email' ? true : false}
@@ -66,7 +68,8 @@ export default function SignUp() {
         id='senha' 
         placeholder='Digite sua senha' 
         type='password' 
-        value={password} 
+        value={password}
+        className='max-lg:w-11/12' 
         onChange={(event) => setPassword(event.target.value)} 
         label='Senha' 
         isError={isError === 'password' ? true : false} 
@@ -77,6 +80,7 @@ export default function SignUp() {
         placeholder='Digite seu telefone' 
         type='text' 
         value={telephone}
+        className='max-lg:w-11/12'
         onChange={(event) => settelephone(event.target.value)} 
         label='Telefone' 
         isError={isError === 'telephone' ? true : false} 
@@ -99,7 +103,7 @@ export default function SignUp() {
           Já tem conta? Iniciar sessão
         </a>
       </form>
-      <div className="bg-white w-full justify-center items-center flex">
+      <div className="bg-white w-full justify-center items-center flex max-md:hidden">
         <Logo className='w-3/4' />
       </div>
     </main>
