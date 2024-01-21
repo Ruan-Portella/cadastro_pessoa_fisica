@@ -1,5 +1,8 @@
 import InputField from './InputField';
 import Button from './Button';
+import SelectField from './SelectField';
+import { useEffect, useState } from 'react';
+import axios from 'axios';
 
 type Adress = {
   street: string,
@@ -13,6 +16,11 @@ type Adress = {
 type ErrorMessage = {
   message: string;
   name: string;
+}
+
+export type State = {
+  id: number,
+  nome: string,
 }
 
 type AdressesModalProps = {
@@ -35,6 +43,15 @@ export default function AdressesModal({
   setIsError,
   isUpdate
   }: AdressesModalProps) {
+  const [data, setData] = useState<State[]>([]);
+
+  useEffect(() => {
+    const getStates = async () => {
+      const response = await axios.get('https://servicodados.ibge.gov.br/api/v1/localidades/estados')
+      setData(response.data);
+    }
+    getStates();
+  })
 
   const adicionarEndereco = () => {
     setAdresses((prevAdresses: Adress[]) => [
@@ -156,11 +173,11 @@ export default function AdressesModal({
         errorMessage='Cidade invalida' 
         isError={verifyError('city')} 
         />
-        <InputField 
+        <SelectField 
         disabled={index + 1 !== count && !isUpdate}  
         labelClassName='text-black' 
         label="Estado" 
-        placeholder="Digite seu Estado" 
+        placeholder="Escolha seu Estado" 
         className='xl:w-[32.9%] sm:w-[49%] max-sm:w-full' 
         id='estado' 
         onChange={(e) => {
@@ -171,7 +188,8 @@ export default function AdressesModal({
         type='text' 
         value={adresses.state} 
         errorMessage='Estado invalido' 
-        isError={verifyError('state')} 
+        isError={verifyError('state')}
+        data={data}
         />
       </div>
       {

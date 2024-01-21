@@ -1,5 +1,6 @@
 import InputField from './InputField';
 import Button from './Button';
+import SelectField from './SelectField';
 
 type Contact = {
   typeContact: string,
@@ -97,7 +98,7 @@ export default function ContactsModal({
         errorMessage='Contato invalido' 
         isError={verifyError('contact')} 
         />
-        <InputField 
+        <SelectField 
         disabled={index + 1 !== count && !isUpdate}  
         labelClassName='text-black' 
         label="Tipo de Contato" 
@@ -113,6 +114,19 @@ export default function ContactsModal({
         value={contacts.typeContact} 
         errorMessage='Tipo invalido' 
         isError={verifyError('typeContact')} 
+        data={[
+        {
+          id: 1,
+          nome: 'Telefone'
+        },
+        {
+          id: 2,
+          nome: 'Celular'
+        },
+        {
+          id: 3,
+          nome: 'Email'
+        },]}
         />
       </div>
       {
