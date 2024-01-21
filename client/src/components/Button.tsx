@@ -8,9 +8,20 @@ type ButtonProps = {
     disabled?: boolean
 }
 
-export default function Button({ onClick, className, title, type, disabled }: ButtonProps) {
+export default function Button({ 
+  onClick, 
+  className, 
+  title, 
+  type, 
+  disabled 
+}: ButtonProps) {
   return (
-    <button disabled={disabled} type={type} className={`w-1/2 py-[6px] mt-3 rounded-[10px] hover:bg-slate-30 text-black font-nunito not-italic font-extrabold leading-8 ${className}`} onClick={onClick}>
+    <button 
+    disabled={disabled} 
+    type={type} 
+    className={`w-1/2 py-[6px] mt-3 rounded-[10px] hover:bg-slate-30 text-black font-nunito not-italic font-extrabold leading-8 ${className}`} 
+    onClick={onClick}
+    >
       {title}
     </button>
   )

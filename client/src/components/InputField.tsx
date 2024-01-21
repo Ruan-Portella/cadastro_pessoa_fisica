@@ -6,7 +6,7 @@ type InputFieldProps = {
     placeholder: string,
     value: string,
     onChange?: (e: ChangeEvent<HTMLInputElement>) => void,
-    isError?: boolean,
+    isError?: boolean | undefined,
     label: string,
     errorMessage?: string
     className?: string,
@@ -14,7 +14,19 @@ type InputFieldProps = {
     disabled?: boolean
 };
 
-export default function InputField({ id, type, placeholder, value, onChange, isError, label, errorMessage, className, labelClassName, disabled }: InputFieldProps) {
+export default function InputField({ 
+    id, 
+    type, 
+    placeholder, 
+    value, 
+    onChange, 
+    isError, 
+    label, 
+    errorMessage, 
+    className, 
+    labelClassName, 
+    disabled 
+}: InputFieldProps) {
     return (
         <div className={`w-1/2 flex flex-col gap-1 ${className}`}>
             <label className={`flex items-start ${labelClassName}`} htmlFor={id}>

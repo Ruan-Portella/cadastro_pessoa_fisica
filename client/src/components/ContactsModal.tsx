@@ -7,16 +7,29 @@ type Contact = {
   contact: string,
 }
 
+type ErrorMessage = {
+  message: string;
+  name: string;
+}
+
 type ContactsModalProps = {
-  isError: string
+  verifyError: (x: string) => boolean | undefined,
   index: number
   contacts: Contact
   onClick?: () => void,
   count: number,
   setContacts: (value: Contact[] | ((prevContacts: Contact[]) => Contact[])) => void
+  setIsError: (value: ErrorMessage[] | ((prevAdresses: ErrorMessage[]) => ErrorMessage[])) => void,
 }
 
-export default function ContactsModal({ isError, index, contacts, count, setContacts }: ContactsModalProps) {
+export default function ContactsModal({ 
+  verifyError, 
+  index, 
+  contacts, 
+  count,
+  setContacts,
+  setIsError
+}: ContactsModalProps) {
 
   const addContact = () => {
     setContacts((prevContacts: Contact[]) => [
@@ -48,16 +61,74 @@ export default function ContactsModal({ isError, index, contacts, count, setCont
   return (
     <div  key={`${index+count}-contact`}>
       <div className='flex flex-wrap gap-x-2 gap-y-2'>
-        <InputField disabled={index + 1 !== count} labelClassName='text-black' label="Nome" placeholder="Digite seu nome" className='xl:w-[32.9%] sm:w-[49%] max-sm:w-ful' id='name' onChange={(e) => handleContacts(index, 'name', e.target.value)} type='text' value={contacts.name} errorMessage='Nome invalido' isError={isError === 'name' ? true : false} />
-        <InputField disabled={index + 1 !== count}  labelClassName='text-black' label="Contato" placeholder="Digite seu email ou numero" className='xl:w-[32.9%] sm:w-[49%] max-sm:w-full' id='type' onChange={(e) => handleContacts(index, 'contact', e.target.value)} type='text' value={contacts.contact} errorMessage='Tipo invalido' isError={isError === 'contact' ? true : false} />
-        <InputField disabled={index + 1 !== count}  labelClassName='text-black' label="Tipo de Contato" placeholder="Digite o tipo de contato" className='xl:w-[32.9%] sm:w-[49%] max-sm:w-full' id='type' onChange={(e) => handleContacts(index, 'typeContact', e.target.value)} type='text' value={contacts.typeContact} errorMessage='Tipo invalido' isError={isError === 'type' ? true : false} />
+        <InputField 
+        disabled={index + 1 !== count} 
+        labelClassName='text-black' 
+        label="Nome" 
+        placeholder="Digite seu nome" 
+        className='xl:w-[32.9%] sm:w-[49%] max-sm:w-ful' 
+        id='name' 
+        onChange={(e) => {
+          handleContacts(index, 'name', e.target.value); 
+          setIsError((prevStatet) => (
+          prevStatet.filter((error) => error.name !== 'nameContact')
+        ))}} 
+        type='text' 
+        value={contacts.name} 
+        errorMessage='Nome invalido' 
+        isError={verifyError('nameContact')} 
+        />
+        <InputField 
+        disabled={index + 1 !== count}  
+        labelClassName='text-black' 
+        label="Contato" 
+        placeholder="Digite seu email ou numero" 
+        className='xl:w-[32.9%] sm:w-[49%] max-sm:w-full'
+        id='type' 
+        onChange={(e) => {
+          handleContacts(index, 'contact', e.target.value); 
+          setIsError((prevStatet) => (
+          prevStatet.filter((error) => error.name !== 'contact')
+        ))}} 
+        type='text' 
+        value={contacts.contact} 
+        errorMessage='Contato invalido' 
+        isError={verifyError('contact')} 
+        />
+        <InputField 
+        disabled={index + 1 !== count}  
+        labelClassName='text-black' 
+        label="Tipo de Contato" 
+        placeholder="Digite o tipo de contato" 
+        className='xl:w-[32.9%] sm:w-[49%] max-sm:w-full' 
+        id='type' 
+        onChange={(e) => {
+          handleContacts(index, 'typeContact', e.target.value); 
+          setIsError((prevStatet) => (
+          prevStatet.filter((error) => error.name !== 'typeContact')
+        ))}} 
+        type='text' 
+        value={contacts.typeContact} 
+        errorMessage='Tipo invalido' 
+        isError={verifyError('typeContact')} 
+        />
       </div>
       {
         index + 1 === count ? (
-          <Button type='button' title='Adicionar novo contato' className='flex bg-black text-white w-1/6 text-[14px] justify-center hover:bg-slate-700' onClick={addContact}/>
+          <Button 
+          type='button' 
+          title='Adicionar novo contato' 
+          className='flex bg-black text-white w-1/6 text-[14px] justify-center hover:bg-slate-700'
+          onClick={addContact}
+          />
         ) : (
           <div className='flex justify-end'>
-             <Button type='button' title='Remover Contato' className='flex bg-black text-white w-1/6 text-[14px] justify-center hover:bg-slate-700' onClick={() => removeContacts(index)}/>
+             <Button 
+             type='button' 
+             title='Remover Contato' 
+             className='flex bg-black text-white w-1/6 text-[14px] justify-center hover:bg-slate-700' 
+             onClick={() => removeContacts(index)}
+             />
           </div>
         )
       }
