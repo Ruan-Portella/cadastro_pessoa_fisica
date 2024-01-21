@@ -22,7 +22,7 @@ export default function Header() {
             'Content-Type': 'application/json',
             'Authorization': `Bearer ${token}`
           }
-        })
+        },)
         const pathname = window.location.pathname;
         pathname === '/create/user' && setSelected('create')
         setUser(response.data)
