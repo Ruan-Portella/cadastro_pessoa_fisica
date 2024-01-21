@@ -65,7 +65,7 @@ docker-compose up -d
 ### 5 - Acesse a aplicação
 
 `
-Pronto! Agora é só acessar o [localhost:5173](http://localhost:5173) e se divertir!
+Pronto! Agora é só acessar o http://localhost:5173 e se divertir!
 `
 
 ## 👉 Sem Docker
@@ -121,7 +121,7 @@ cd .. && cd server && npm run dev
 ### 6 - Acesse a aplicação
 
 `
-Pronto! Agora é só acessar o [localhost:5173](http://localhost:5173) e se divertir!
+Pronto! Agora é só acessar o http://localhost:5173 e se divertir!
 `
 
 </details>
