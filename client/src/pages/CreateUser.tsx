@@ -116,7 +116,11 @@ export default function CreateUser() {
         <form className="flex flex-col p-4 pl-10 pr-10 gap-6 w-full justify-center items-center rounded-lg 
     border-[#D3E2E5] border-[1px] bg-[white] max-sm:w-full max-sm:px-4 max-sm:py-6 max-sm:border-none">
           <div className="flex flex-col w-[100%] items-start">
-            <h1 className="font-semibold text-[24px] text-black font-nunito leading-[32px]">Cadastrar Pessoa Física</h1>
+            <h1 className="font-semibold text-[24px] text-black font-nunito leading-[32px]">
+              {
+                isUpdate ? 'Atualizar Pessoa Física' : 'Cadastrar Pessoa Física'
+              }
+            </h1>
             <p className="text-[16px] font-normal leading-6 text-[#6B7280]">Por favor, preencha todos os campos</p>
           </div>
           <div className="flex flex-col gap-4 w-full">
