@@ -50,19 +50,25 @@ git clone git@github.com:Ruan-Portella/cadastro_pessoa_fisica.git && cd cadastro
  Altere o .env.example para .env na pasta server e preencha as variáveis de ambiente com as informações do seu banco de dados.
 `
 
-### 3 - Faça o build do backend
+### 3 - Instale as dependências
+
+```sh
+cd client && npm install && cd ../server && npm install
+```
+
+### 4 - Faça o build do backend
 
 ```sh
 cd server && npm run build
 ```
 
-### 4 - Suba o container do banco de dados, front e back.
+### 5 - Suba o container do banco de dados, front e back.
 
 ```sh
 docker-compose up -d
 ```
 
-### 5 - Acesse a aplicação
+### 6 - Acesse a aplicação
 
 `
 Pronto! Agora é só acessar o http://localhost:5173 e se divertir!
