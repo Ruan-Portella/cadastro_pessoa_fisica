@@ -33,7 +33,7 @@ export default function Login() {
         {
           error && <p className='text-red-500'>Email ou senha incorretos</p>
         }
-        <Button title='Entrar' onClick={onSubmit} />
+        <Button title='Entrar' onClick={onSubmit} className='bg-white text-[20px]' />
         <a href="/signUp" className="font-semibold text-white not-italic hover:text-gray-300">
             Não tem conta? Se inscreva-se
         </a>

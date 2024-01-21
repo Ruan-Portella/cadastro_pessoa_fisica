@@ -46,7 +46,7 @@ export default function SignUp() {
         <InputField id='senha' placeholder='Digite sua senha' type='password' value={password} onChange={(event) => setPassword(event.target.value)} label='Senha' isError={isError === 'password' ? true : false} errorMessage='Senha invalida'  />
         <InputField id='telephone' placeholder='Digite seu telefone' type='text' value={telephone} onChange={(event) => settelephone(event.target.value)} label='Telefone' isError={isError === 'telephone' ? true : false} errorMessage='Telefone invalido'  />
         <Upload label="Imagem de Perfil" isError={isError === 'profileImage' ? true : false} setProfileImage={setProfileImage} profileImage={profileImage} errorMessage='Imagem invalido'  />
-        <Button title='Cadastrar' onClick={onSubmit} />
+        <Button title='Cadastrar' onClick={onSubmit} className='bg-white text-[20px]' />
         <a href="/" className="font-semibold text-white not-italic hover:text-gray-300">
           Já tem conta? Iniciar sessão
         </a>
