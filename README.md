@@ -59,7 +59,7 @@ cd client && npm install && cd ../server && npm install
 ### 4 - Faça o build do backend
 
 ```sh
-cd server && npm run build
+npm run build
 ```
 
 ### 5 - Suba o container do banco de dados, front e back.
