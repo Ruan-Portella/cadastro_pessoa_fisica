@@ -88,7 +88,7 @@ git clone git@github.com:Ruan-Portella/cadastro_pessoa_fisica.git && cd cadastro
 cd client && npm install && cd ../server && npm install
 ```
 
-### 3 - Faça o build do backend
+### 4 - Faça o build do backend
 
 ```sh
 npm run build
