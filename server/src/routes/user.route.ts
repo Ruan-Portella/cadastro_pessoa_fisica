@@ -29,10 +29,4 @@ userRouter.get(
   userController.getUser
 );
 
-userRouter.post('/pj', privatePerson.create)
-userRouter.get('/pj', privatePerson.getAllPrivatePerson)
-userRouter.get('/pj/:id', privatePerson.getPrivatePersonById)
-userRouter.delete('/user/:id', privatePerson.deletePrivatePerson)
-userRouter.put('/pj/:id', privatePerson.updatePrivatePerson)
-
 export default userRouter;

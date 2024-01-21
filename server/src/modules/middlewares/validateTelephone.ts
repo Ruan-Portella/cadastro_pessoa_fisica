@@ -1,6 +1,6 @@
 import { Request, Response, NextFunction } from 'express';
 
-export default class ValidateEmail {
+export default class ValidateTelephone {
     async validate(request: Request, response: Response, next: NextFunction): Promise<Response | void> {
         const { telephone } = request.body;
 

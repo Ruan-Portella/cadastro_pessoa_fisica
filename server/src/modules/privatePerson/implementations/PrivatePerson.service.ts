@@ -115,7 +115,7 @@ export default class PrivatePerson implements IPrivatePerson {
               { model: Address, as: "address" },
               { model: Contacts, as: "contacts" },
             ],
-        });
+        }) as any;
 
         if (!privatePerson) {
             return { status: 404, data: { message: 'User not found' } };

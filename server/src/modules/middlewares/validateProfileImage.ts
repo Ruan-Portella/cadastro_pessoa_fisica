@@ -1,6 +1,6 @@
 import { Request, Response, NextFunction } from 'express';
 
-export default class ValidateEmail {
+export default class ValidateProfileImage {
     async validate(request: Request, response: Response, next: NextFunction): Promise<Response | void> {
         const { profileImage } = request.body;
 
