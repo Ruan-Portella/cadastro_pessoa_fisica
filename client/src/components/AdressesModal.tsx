@@ -51,7 +51,7 @@ export default function AdressesModal({
       setData(response.data);
     }
     getStates();
-  })
+  }, [])
 
   const adicionarEndereco = () => {
     setAdresses((prevAdresses: Adress[]) => [

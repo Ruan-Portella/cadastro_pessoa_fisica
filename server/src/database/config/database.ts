@@ -1,6 +1,4 @@
 import { Options } from "sequelize";
-import dotenv from "dotenv";
-dotenv.config();
 
 const config: Options = {
   username: process.env.MYSQLUSER || 'root',

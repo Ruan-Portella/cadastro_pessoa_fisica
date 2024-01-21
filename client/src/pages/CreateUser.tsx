@@ -36,27 +36,26 @@ export default function CreateUser() {
   const [isUpdate, setIsUpdate] = useState(false);
   const navigate = useNavigate();
 
-  async function getUser() {
-    const response = await axios.get(`http://localhost:3001/pj/${window.location.pathname.split('/')[2]}`, {
-      headers: {
-        'Authorization': `Bearer ${localStorage.getItem('token')}`
-      }
-    });
-    setName(response.data.name);
-    SetMiddleName(response.data.middleName);
-    setDate(response.data.dateOfBirth);
-    setEmail(response.data.email);
-    setCPF(response.data.cpf);
-    setRG(response.data.rg);
-    setAdresses(response.data.address);
-    setContacts(response.data.contacts);
-  }
-
   useEffect(() => {
     try {
       if (window.location.pathname === '/create/user') {
         setIsUpdate(false)
         return;
+      }
+      const getUser = async () => {
+        const response = await axios.get(`http://localhost:3001/pj/${window.location.pathname.split('/')[2]}`, {
+          headers: {
+            'Authorization': `Bearer ${localStorage.getItem('token')}`
+          }
+        });
+        setName(response.data.name);
+        SetMiddleName(response.data.middleName);
+        setDate(response.data.dateOfBirth);
+        setEmail(response.data.email);
+        setCPF(response.data.cpf);
+        setRG(response.data.rg);
+        setAdresses(response.data.address);
+        setContacts(response.data.contacts);
       }
       getUser();
       setIsUpdate(true);
