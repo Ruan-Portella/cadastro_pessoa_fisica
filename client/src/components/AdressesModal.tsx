@@ -23,6 +23,7 @@ type AdressesModalProps = {
   count: number,
   setAdresses: (value: Adress[] | ((prevAdresses: Adress[]) => Adress[])) => void,
   setIsError: (value: ErrorMessage[] | ((prevAdresses: ErrorMessage[]) => ErrorMessage[])) => void,
+  isUpdate: boolean
 }
 
 export default function AdressesModal({ 
@@ -31,7 +32,8 @@ export default function AdressesModal({
   adresses, 
   count, 
   setAdresses, 
-  setIsError 
+  setIsError,
+  isUpdate
   }: AdressesModalProps) {
 
   const adicionarEndereco = () => {
@@ -70,7 +72,7 @@ export default function AdressesModal({
     <div key={`${index+count}-address`}>
       <div className='flex flex-wrap gap-x-2 gap-y-2'>
         <InputField 
-        disabled={index + 1 !== count}  
+        disabled={index + 1 !== count && !isUpdate}  
         labelClassName='text-black' 
         label="Logradouro" 
         placeholder="Digite seu logradouro" 
@@ -87,7 +89,7 @@ export default function AdressesModal({
         isError={verifyError('street')} 
         />
         <InputField 
-        disabled={index + 1 !== count}  
+        disabled={index + 1 !== count && !isUpdate}  
         labelClassName='text-black' 
         label="Numero" 
         placeholder="Digite seu numero" 
@@ -104,7 +106,7 @@ export default function AdressesModal({
         isError={verifyError('number')} 
         />
         <InputField 
-        disabled={index + 1 !== count} 
+        disabled={index + 1 !== count && !isUpdate} 
         labelClassName='text-black' 
         label="CEP" 
         placeholder="Digite seu CEP" 
@@ -121,7 +123,7 @@ export default function AdressesModal({
         isError={verifyError('zipCode')} 
         />
         <InputField 
-        disabled={index + 1 !== count}  
+        disabled={index + 1 !== count && !isUpdate}  
         labelClassName='text-black' 
         label="Complemento" 
         placeholder="Digite seu complemento" 
@@ -138,7 +140,7 @@ export default function AdressesModal({
         isError={verifyError('complement')} 
         />
         <InputField 
-        disabled={index + 1 !== count}  
+        disabled={index + 1 !== count && !isUpdate}  
         labelClassName='text-black' 
         label="Cidade" 
         placeholder="Digite sua Cidade" 
@@ -155,7 +157,7 @@ export default function AdressesModal({
         isError={verifyError('city')} 
         />
         <InputField 
-        disabled={index + 1 !== count}  
+        disabled={index + 1 !== count && !isUpdate}  
         labelClassName='text-black' 
         label="Estado" 
         placeholder="Digite seu Estado" 

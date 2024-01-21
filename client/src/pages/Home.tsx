@@ -20,18 +20,18 @@ export default function Home() {
 
   const deleteUser = (async (id: string) => {
     try {
-      await axios.delete(`http://localhost:3001/user/${id}`, {
-        headers:{
+      await axios.delete(`http://localhost:3001/pj/${id}`, {
+        headers: {
           'Content-Type': 'application/json',
           'Authorization': `Bearer ${localStorage.token}`
         }
       })
-        const newUsers= users.filter((pet: {id: string}) => pet.id !== id)
-        setUsers(newUsers)
+      const newUsers = users.filter((pet: { id: string }) => pet.id !== id)
+      setUsers(newUsers)
     } catch {
       console.log('error');
     }
-})
+  })
 
 
   return (
@@ -46,30 +46,38 @@ export default function Home() {
             <h1 className="font-semibold text-[24px] text-black font-nunito leading-[32px]">Bem-Vindo ao Sistema de Cadastro!</h1>
           </div>
           <div className="flex flex-col w-full">
-            <table className='table-auto text-black'>
-              <thead>
-                <tr>
-                  <th>Nome</th>
-                  <th>CPF</th>
-                  <th>Email</th>
-                  <th>Operações</th>
-                </tr>
-              </thead>
-              <tbody>
-                {
-                  users.map((user: {id: string, name: string, cpf: string, email: string}) => (
-                    <tr key={user.id} className='text-center'>
-                      <td>{user.name}</td>
-                      <td>{user.cpf}</td>
-                      <td>{user.email}</td>
-                      <td>
-                        <OperationCard user={user} deleteUser={deleteUser} />
-                      </td>
+            {
+              users.length === 0 ? (
+                <div className='flex flex-col items-center'>
+                  <h2 className='text-2xl font-semibold text-black'>Nenhum usuário cadastrado</h2>
+                </div>
+              ) : (
+                <table className='table-auto text-black'>
+                  <thead>
+                    <tr>
+                      <th>Nome</th>
+                      <th>CPF</th>
+                      <th>Email</th>
+                      <th>Operações</th>
                     </tr>
-                  ))
-                }
-              </tbody>
-            </table>
+                  </thead>
+                  <tbody>
+                    {
+                      users.map((user: { id: string, name: string, cpf: string, email: string }) => (
+                        <tr key={user.id} className='text-center'>
+                          <td>{user.name}</td>
+                          <td>{user.cpf}</td>
+                          <td>{user.email}</td>
+                          <td>
+                            <OperationCard user={user} deleteUser={deleteUser} />
+                          </td>
+                        </tr>
+                      ))
+                    }
+                  </tbody>
+                </table>
+              )
+            }
           </div>
         </div>
       </div>

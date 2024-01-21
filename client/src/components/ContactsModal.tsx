@@ -20,6 +20,7 @@ type ContactsModalProps = {
   count: number,
   setContacts: (value: Contact[] | ((prevContacts: Contact[]) => Contact[])) => void
   setIsError: (value: ErrorMessage[] | ((prevAdresses: ErrorMessage[]) => ErrorMessage[])) => void,
+  isUpdate: boolean
 }
 
 export default function ContactsModal({ 
@@ -28,7 +29,8 @@ export default function ContactsModal({
   contacts, 
   count,
   setContacts,
-  setIsError
+  setIsError,
+  isUpdate
 }: ContactsModalProps) {
 
   const addContact = () => {
@@ -62,7 +64,7 @@ export default function ContactsModal({
     <div  key={`${index+count}-contact`}>
       <div className='flex flex-wrap gap-x-2 gap-y-2'>
         <InputField 
-        disabled={index + 1 !== count} 
+        disabled={index + 1 !== count && !isUpdate} 
         labelClassName='text-black' 
         label="Nome" 
         placeholder="Digite seu nome" 
@@ -79,7 +81,7 @@ export default function ContactsModal({
         isError={verifyError('nameContact')} 
         />
         <InputField 
-        disabled={index + 1 !== count}  
+        disabled={index + 1 !== count && !isUpdate}  
         labelClassName='text-black' 
         label="Contato" 
         placeholder="Digite seu email ou numero" 
@@ -96,7 +98,7 @@ export default function ContactsModal({
         isError={verifyError('contact')} 
         />
         <InputField 
-        disabled={index + 1 !== count}  
+        disabled={index + 1 !== count && !isUpdate}  
         labelClassName='text-black' 
         label="Tipo de Contato" 
         placeholder="Digite o tipo de contato" 

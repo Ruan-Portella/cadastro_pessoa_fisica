@@ -4,6 +4,7 @@ import InputField from '../components/InputField'
 import AdressesModal from '../components/AdressesModal';
 import ContactsModal from '../components/ContactsModal';
 import Button from '../components/Button';
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios'
 
 interface ErrorMessage {
@@ -32,6 +33,8 @@ export default function CreateUser() {
     contact: '',
   }]);
   const [isError, setIsError] = useState<ErrorMessage[]>([]);
+  const [isUpdate, setIsUpdate] = useState(false);
+  const navigate = useNavigate();
 
   async function getUser() {
     const response = await axios.get(`http://localhost:3001/pj/${window.location.pathname.split('/')[2]}`, {
@@ -52,9 +55,11 @@ export default function CreateUser() {
   useEffect(() => {
     try {
       if (window.location.pathname === '/create/user') {
+        setIsUpdate(false)
         return;
       }
       getUser();
+      setIsUpdate(true);
     } catch {
       console.log('error');
     }
@@ -82,6 +87,7 @@ export default function CreateUser() {
               'Authorization': `Bearer ${localStorage.getItem('token')}`
             }
           })
+          navigate('/home')
       } else {
         await axios.put(`http://localhost:3001/pj/${window.location.pathname.split('/')[2]}`, data,
           {
@@ -89,6 +95,7 @@ export default function CreateUser() {
               'Authorization': `Bearer ${localStorage.getItem('token')}`
             }
           })
+          navigate('/home')
       }
     } catch (error) {
       if (axios.isAxiosError(error)) {
@@ -236,6 +243,7 @@ export default function CreateUser() {
                     setIsError={setIsError}
                     verifyError={verifyError}
                     setAdresses={setAdresses}
+                    isUpdate={isUpdate}
                   />
                 ))
               }
@@ -251,6 +259,7 @@ export default function CreateUser() {
                     setIsError={setIsError}
                     verifyError={verifyError}
                     setContacts={setContacts}
+                    isUpdate={isUpdate}
                   />
                 ))
               }

@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { FormEvent, MouseEvent, useState } from 'react';
 import Logo from '../assets/signUp.tsx'
 import InputField from '../components/InputField.tsx';
 import Button from '../components/Button.tsx';
@@ -19,7 +19,8 @@ export default function SignUp() {
   const [isError, setisError] = useState('')
   const navigate = useNavigate()
 
-  const onSubmit = async () => {
+  const onSubmit = async (e: FormEvent<HTMLInputElement> | undefined | MouseEvent<HTMLElement>) => {
+    e?.preventDefault()
     try {
       await axios.post('http://localhost:3001/create', {
         email,
@@ -39,7 +40,7 @@ export default function SignUp() {
 
   return (
     <main className="w-full h-[100dvh] flex">
-      <div className="bg-red w-full flex flex-col justify-center items-center gap-3">
+      <form className="bg-red w-full flex flex-col justify-center items-center gap-3">
         <h1 className='font-bold text-2xl'>Cria uma conta</h1>
         <InputField 
         id='name' 
@@ -90,13 +91,14 @@ export default function SignUp() {
         />
         <Button 
         title='Cadastrar' 
+        type='submit'
         onClick={onSubmit} 
         className='bg-white text-[20px]' 
         />
         <a href="/" className="font-semibold text-white not-italic hover:text-gray-300">
           Já tem conta? Iniciar sessão
         </a>
-      </div>
+      </form>
       <div className="bg-white w-full justify-center items-center flex">
         <Logo className='w-3/4' />
       </div>

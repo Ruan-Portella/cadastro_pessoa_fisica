@@ -1,7 +1,7 @@
-import { MouseEvent } from "react"
+import { FormEvent, MouseEvent } from "react"
 
 type ButtonProps = {
-    onClick?: (event?: MouseEvent<HTMLElement>) => void
+    onClick?: (event?: MouseEvent<HTMLElement> | FormEvent<HTMLInputElement> | undefined) => void
     className?: string
     title: string
     type?: "submit" | "reset" | "button"
