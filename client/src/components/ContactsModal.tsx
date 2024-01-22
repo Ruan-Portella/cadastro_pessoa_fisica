@@ -14,7 +14,7 @@ type ErrorMessage = {
 }
 
 type ContactsModalProps = {
-  verifyError: (x: string) => boolean | undefined,
+  verifyError: (x: string) => string | undefined,
   index: number
   contacts: Contact
   onClick?: () => void,
@@ -78,7 +78,6 @@ export default function ContactsModal({
         ))}} 
         type='text' 
         value={contacts.name} 
-        errorMessage='Nome invalido' 
         isError={verifyError('nameContact')} 
         />
         <InputField 
@@ -95,7 +94,6 @@ export default function ContactsModal({
         ))}} 
         type='text' 
         value={contacts.contact} 
-        errorMessage='Contato invalido' 
         isError={verifyError('contact')} 
         />
         <SelectField 
@@ -113,7 +111,7 @@ export default function ContactsModal({
         type='text' 
         value={contacts.typeContact} 
         errorMessage='Tipo invalido' 
-        isError={verifyError('typeContact')} 
+        isError={verifyError('typeContact') === 'Type contact is required' ? true : false} 
         data={[
         {
           id: 1,

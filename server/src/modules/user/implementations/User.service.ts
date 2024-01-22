@@ -9,11 +9,22 @@ const secret = process.env.JWT_SECRET || 'default';
 export default class UserService implements IUserService {
     async create(data: any): Promise<ServiceResponse> {
         const { name, email, password, telephone, profileImage } = data;
+        const errors = [];
 
         const userExists = await this.findByEmail(email);
 
         if (userExists.status === 200) {
-            return { status: 400, data: { message: 'User already exists' } };
+            errors.push({ message: 'User already exists', name: 'email' });
+        }
+
+        const telephoneExists = await this.findByTelephone(telephone);
+
+        if (telephoneExists.status === 200) {
+            errors.push({ message: 'Telephone already exists', name: 'telephone' });
+        }
+
+        if (errors.length > 0) {
+            return { status: 400, data: { errors } };
         }
 
         const hashedPassword = await bcrypt.hash(password, 10);
@@ -39,6 +50,16 @@ export default class UserService implements IUserService {
     
     async findByEmail(email: string): Promise<ServiceResponse> {
         const user = await User.findOne({ where: { email } });
+
+        if (!user) {
+            return { status: 404, data: { message: 'User not found' } };
+        }
+
+        return { status: 200, data: user };
+    }
+
+    async findByTelephone(telephone: string): Promise<ServiceResponse> {
+        const user = await User.findOne({ where: { telephone } });
 
         if (!user) {
             return { status: 404, data: { message: 'User not found' } };

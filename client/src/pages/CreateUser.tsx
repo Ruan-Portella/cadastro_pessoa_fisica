@@ -86,7 +86,7 @@ export default function CreateUser() {
               'Authorization': `Bearer ${localStorage.getItem('token')}`
             }
           })
-          navigate('/home')
+        navigate('/home')
       } else {
         await axios.put(`http://localhost:3001/pj/${window.location.pathname.split('/')[2]}`, data,
           {
@@ -94,17 +94,25 @@ export default function CreateUser() {
               'Authorization': `Bearer ${localStorage.getItem('token')}`
             }
           })
-          navigate('/home')
+        navigate('/home')
       }
     } catch (error) {
       if (axios.isAxiosError(error)) {
-        setIsError(error.response?.data);
+        if (!error.response?.data.length) {
+          setIsError([error.response?.data]);
+        } else {
+          setIsError(error.response?.data);
+        }
       }
     }
   };
 
   const verifyError = (name: string) => {
-    return isError.some((error) => error.name === name);
+    if (isError.length > 0) {
+      if (isError.some((error) => error.name === name)) {
+        return isError.filter((error) => error.name === name)[0].message;
+      }
+    }
   }
 
   return (
@@ -140,7 +148,6 @@ export default function CreateUser() {
                     ))
                   }}
                   type='text' value={name}
-                  errorMessage='Nome invalido'
                   isError={verifyError('name')}
                 />
                 <InputField
@@ -157,7 +164,6 @@ export default function CreateUser() {
                   }}
                   type='text'
                   value={middlename}
-                  errorMessage='Sobrenome invalido'
                   isError={verifyError('middleName')}
                 />
                 <InputField
@@ -167,14 +173,22 @@ export default function CreateUser() {
                   className='xl:w-[32.9%] sm:w-[49%] max-sm:w-full'
                   id='date'
                   onChange={(event) => {
-                    setDate(event.target.value);
+                    let valor = event.target.value.replace(/\D/g, '');
+
+                    if (valor.length > 2) {
+                      valor = valor.substring(0, 2) + '/' + valor.substring(2);
+                    }
+                    if (valor.length > 5) {
+                      valor = valor.substring(0, 5) + '/' + valor.substring(5, 9);
+                    }
+
+                    setDate(valor);
                     setIsError((prevStatet) => (
                       prevStatet.filter((error) => error.name !== 'dateOfBirth')
                     ))
                   }}
                   type='text'
                   value={date}
-                  errorMessage='Data invalida'
                   isError={verifyError('dateOfBirth')}
                 />
                 <InputField
@@ -191,7 +205,6 @@ export default function CreateUser() {
                   }}
                   type='text'
                   value={email}
-                  errorMessage='Email invalido'
                   isError={verifyError('email')}
                 />
                 <InputField
@@ -201,14 +214,26 @@ export default function CreateUser() {
                   className='xl:w-[32.9%] sm:w-[49%] max-sm:w-full'
                   id='cpf'
                   onChange={(event) => {
-                    setCPF(event.target.value);
+                    let valor = event.target.value.replace(/\D/g, '');
+
+                    if (valor.length > 3) {
+                      valor = valor.substring(0, 3) + '.' + valor.substring(3);
+                    }
+
+                    if (valor.length > 7) {
+                      valor = valor.substring(0, 7) + '.' + valor.substring(7);
+                    }
+
+                    if (valor.length > 11) {
+                      valor = valor.substring(0, 11) + '-' + valor.substring(11, 13);
+                    }
+                    setCPF(valor);
                     setIsError((prevStatet) => (
                       prevStatet.filter((error) => error.name !== 'cpf')
                     ))
                   }}
                   type='text'
                   value={CPF}
-                  errorMessage='Cpf invalido'
                   isError={verifyError('cpf')}
                 />
                 <InputField
@@ -218,14 +243,28 @@ export default function CreateUser() {
                   className='xl:w-[32.9%] sm:w-[49%] max-sm:w-full'
                   id='rg'
                   onChange={(event) => {
-                    setRG(event.target.value);
+                    let valor = event.target.value.replace(/\D/g, '');
+
+                    if (valor.length > 2) {
+                      valor = valor.substring(0, 2) + '.' + valor.substring(2);
+                    }
+
+                    if (valor.length > 6) {
+                      valor = valor.substring(0, 6) + '.' + valor.substring(6);
+                    }
+
+                    if (valor.length > 10) {
+                      valor = valor.substring(0, 10) + '-' + valor.substring(10, 11);
+                    }
+                    
+
+                    setRG(valor);
                     setIsError((prevStatet) => (
                       prevStatet.filter((error) => error.name !== 'rg')
                     ))
                   }}
                   type='text'
                   value={RG}
-                  errorMessage='RG invalido'
                   isError={verifyError('rg')}
                 />
               </div>

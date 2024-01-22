@@ -10,6 +10,6 @@ privatePersonRouter.post('/pj', middlewares.validateToken, middlewares.validateU
 privatePersonRouter.get('/pj', middlewares.validateToken, privatePerson.getAllPrivatePerson)
 privatePersonRouter.get('/pj/:id', middlewares.validateToken, privatePerson.getPrivatePersonById)
 privatePersonRouter.delete('/pj/:id', middlewares.validateToken,  privatePerson.deletePrivatePerson)
-privatePersonRouter.put('/pj/:id', middlewares.validateToken, privatePerson.updatePrivatePerson)
+privatePersonRouter.put('/pj/:id', middlewares.validateToken, middlewares.validateUser, privatePerson.updatePrivatePerson)
 
 export default privatePersonRouter;

@@ -24,7 +24,7 @@ export type State = {
 }
 
 type AdressesModalProps = {
-  verifyError: (x: string) => boolean | undefined,
+  verifyError: (x: string) => string | undefined,
   index: number
   adresses: Adress
   onClick?: () => void,
@@ -101,8 +101,7 @@ export default function AdressesModal({
           prevStatet.filter((error) => error.name !== 'street')
         ))}} 
         type='text' 
-        value={adresses.street} 
-        errorMessage='Logradouro invalido' 
+        value={adresses.street}  
         isError={verifyError('street')} 
         />
         <InputField 
@@ -119,7 +118,6 @@ export default function AdressesModal({
         ))}} 
         type='text' 
         value={adresses.number} 
-        errorMessage='Numero invalido' 
         isError={verifyError('number')} 
         />
         <InputField 
@@ -130,13 +128,22 @@ export default function AdressesModal({
         className='xl:w-[32.9%] sm:w-[49%] max-sm:w-full' 
         id='cep' 
         onChange={(e) => {
-          handleAdresses(index, 'zipCode', e.target.value); 
+          let valor = e.target.value.replace(/\D/g, '');
+
+          if (valor.length > 8) {
+            valor = valor.slice(0, 8);
+          }
+
+          if (valor.length === 8) {
+            valor = valor.replace(/(\d{5})(\d{3})/, '$1-$2');
+          }
+
+          handleAdresses(index, 'zipCode', valor); 
           setIsError((prevStatet) => (
           prevStatet.filter((error) => error.name !== 'zipCode')
         ))}} 
         type='text' 
         value={adresses.zipCode} 
-        errorMessage='CEP invalida' 
         isError={verifyError('zipCode')} 
         />
         <InputField 
@@ -153,7 +160,6 @@ export default function AdressesModal({
         ))}} 
         type='text' 
         value={adresses.complement} 
-        errorMessage='Complemento invalido' 
         isError={verifyError('complement')} 
         />
         <InputField 
@@ -170,7 +176,6 @@ export default function AdressesModal({
         ))}} 
         type='text' 
         value={adresses.city} 
-        errorMessage='Cidade invalida' 
         isError={verifyError('city')} 
         />
         <SelectField 
@@ -188,7 +193,6 @@ export default function AdressesModal({
         type='text' 
         value={adresses.state} 
         errorMessage='Estado invalido' 
-        isError={verifyError('state')}
         data={data}
         />
       </div>

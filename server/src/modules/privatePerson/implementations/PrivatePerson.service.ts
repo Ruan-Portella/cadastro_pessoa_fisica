@@ -12,12 +12,29 @@ const sequelize = new Sequelize(config);
 
 export default class PrivatePerson implements IPrivatePerson {
     async create(data: any): Promise<ServiceResponse> {
-        const { email } = data;
+        const { email, rg, cpf } = data;
+        const errors = [];
 
-        const userExists = await this.findByEmail(email);
+        const userExistsEmail = await this.findByEmail(email);
 
-        if (userExists.status === 200) {
-            return { status: 400, data: { message: 'User already exists' } };
+        if (userExistsEmail.status === 200) {
+            errors.push({ message: 'User already exists', name: 'email' });
+        }
+
+        const userExistsRg = await this.findByRg(rg);
+
+        if (userExistsRg.status === 200) {
+            errors.push({ message: 'User already exists', name: 'rg' });
+        }
+
+        const userExistsCpf = await this.findByCpf(cpf);
+
+        if (userExistsCpf.status === 200) {
+            errors.push({ message: 'User already exists', name: 'cpf' });
+        }
+
+        if (errors.length > 0) {
+            return { status: 400, data: errors };
         }
 
         const result = await sequelize.transaction(async (t: typeof Sequelize) => {
@@ -59,6 +76,26 @@ export default class PrivatePerson implements IPrivatePerson {
     
     async findByEmail(email: string): Promise<ServiceResponse> {
         const user = await PrivatePersonModel.findOne({ where: { email } });
+
+        if (!user) {
+            return { status: 404, data: { message: 'User not found' } };
+        }
+
+        return { status: 200, data: user };
+    }
+
+    async findByRg(rg: string): Promise<ServiceResponse> {
+        const user = await PrivatePersonModel.findOne({ where: { rg } });
+
+        if (!user) {
+            return { status: 404, data: { message: 'User not found' } };
+        }
+
+        return { status: 200, data: user };
+    }
+
+    async findByCpf(cpf: string): Promise<ServiceResponse> {
+        const user = await PrivatePersonModel.findOne({ where: { cpf } });
 
         if (!user) {
             return { status: 404, data: { message: 'User not found' } };
@@ -116,9 +153,38 @@ export default class PrivatePerson implements IPrivatePerson {
               { model: Contacts, as: "contacts" },
             ],
         }) as any;
+        const errors = [];
 
         if (!privatePerson) {
             return { status: 404, data: { message: 'User not found' } };
+        }
+
+        if (privatePerson.dataValues.email !== data.email) {
+            const userExistsEmail = await this.findByEmail(data.email);
+
+            if (userExistsEmail.status === 200) {
+                errors.push({ message: 'User already exists', name: 'email' });
+            }
+        }
+
+        if (privatePerson.dataValues.cpf !== data.cpf) {
+            const userExistsCpf = await this.findByCpf(data.cpf);
+
+            if (userExistsCpf.status === 200) {
+                errors.push({ message: 'User already exists', name: 'cpf' });
+            }
+        }
+
+        if (privatePerson.dataValues.rg !== data.rg) {
+            const userExistsRg = await this.findByRg(data.rg);
+
+            if (userExistsRg.status === 200) {
+                errors.push({ message: 'User already exists', name: 'rg' });
+            }
+        }
+
+        if (errors.length > 0) {
+            return { status: 400, data: errors };
         }
 
         const addressArray = privatePerson.dataValues.address.map((address: any) => address.dataValues);
