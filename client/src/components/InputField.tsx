@@ -41,6 +41,7 @@ const translateErrors: ErrorMessages = {
     'Telephone is required': 'Telefone é obrigatório',
     'Password is required': 'Senha é obrigatório',
     'User already exists': "Usuário já existe",
+    "Telephone already exists": "Telefone já existe",
 };
 
 export default function InputField({ 
