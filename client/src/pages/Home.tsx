@@ -45,7 +45,7 @@ export default function Home() {
           <div className="flex flex-col w-[100%] items-start">
             <h1 className="font-semibold text-[24px] text-black font-nunito leading-[32px]">Bem-Vindo ao Sistema de Cadastro!</h1>
           </div>
-          <div className="flex flex-col w-full">
+          <div className="flex flex-col w-full max-sm:overflow-scroll">
             {
               users.length === 0 ? (
                 <div className='flex flex-col items-center'>
